@@ -21,5 +21,8 @@ public class InputValidation {
     //"-" 반드시 필요
     public void phoneCheck(String phone)throws MyException {
         boolean check = Pattern.matches("^\\d{2,3}-\\d{3,4}-\\d{4}$", phone);
+        if (!check) {
+            throw new MyException("※서식대로 입력해주세요");
+        }
     }
 }
