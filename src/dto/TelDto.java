@@ -46,7 +46,6 @@ public class TelDto {
     public String getTelNum() {
         return telNum;
     }
-
     public void setTelNum(String telNum) {
         this.telNum = telNum;
     }
