@@ -2,24 +2,32 @@ package view;
 
 import exception.InputValidation;
 import exception.MyException;
+import service.TelBookService;
 
 import java.util.Scanner;
 
 public class UserView {
     private final Scanner sc;
+    private final TelBookService service;
 
-    public UserView(Scanner sc) {
+    public UserView(Scanner sc, TelBookService service) {
         this.sc = sc;
+        this.service = service;
     }
 
     public void insert() throws MyException {
         // 검증 클래스 생성
         InputValidation va = new InputValidation();
         System.out.println("==주소록 등록==");
+        String name = "";
+        int age = 0;
+        String address = "";
+        String telNum = "";
+
         while (true) {
             try {
                 System.out.println("이름 : ");
-                String name = sc.next();
+                name = sc.next();
                 va.nameCheck(name);
                 break;
             } catch (MyException e) {
@@ -29,7 +37,7 @@ public class UserView {
         while (true) {
             try {
                 System.out.println("나이 : ");
-                int age = sc.nextInt();
+                age = sc.nextInt();
                 va.ageCheck(age);
                 break;
             } catch (MyException e) {
@@ -37,18 +45,19 @@ public class UserView {
             }
         }
         System.out.println("주소 : ");
-        String address = sc.next();
+        address = sc.next();
 
         while (true) {
             try {
                 System.out.println("전화번호(XXX-XXXX-XXXX) : ");
-                String telNum = sc.next();
+                telNum = sc.next();
                 va.phoneCheck(telNum);
                 break;
             } catch (MyException e) {
                 System.out.println(e.getMessage());
             }
         }
+        service.insert(name, age, address, telNum);
 
 
     }
