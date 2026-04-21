@@ -1,10 +1,14 @@
+import db.DBConnect;
 import exception.MyException;
 import view.UserView;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class TelBookMain {
     public static void main(String[] args) throws MyException {
+        Connection connection = DBConnect.getConnection();
+
         Scanner sc = new Scanner(System.in);
         //UserView 인스턴스 생성
         UserView userView = new UserView(sc);
