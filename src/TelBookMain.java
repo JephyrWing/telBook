@@ -5,10 +5,11 @@ import service.TelBookService;
 import view.UserView;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class TelBookMain {
-    public static void main(String[] args) throws MyException {
+    public static void main(String[] args) throws MyException, SQLException {
         Connection connection = DBConnect.getConnection();
         TelBookRepository repository = new TelBookRepository(connection);
         TelBookService service = new TelBookService(repository);
@@ -45,7 +46,7 @@ public class TelBookMain {
                     break;
                 case 6:
                     System.out.println("시스템을 종료합니다.");
-                    return;
+                    connection.close();
             }
         }
     }

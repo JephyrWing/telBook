@@ -31,4 +31,12 @@ public class TelBookService {
     public int delete(int id) {
         return repository.delete(id);
     }
+
+    public void update(int id, String name, int age, String address, String telNum) {
+        TelDto dto = new TelDto((long)id, name, age, address, telNum);
+        int result = repository.updateData(id, dto);
+        if(result > 0) {
+            System.out.println("정상적으로 저장되었습니다.");
+        }
+    }
 }
