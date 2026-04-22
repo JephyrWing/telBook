@@ -69,6 +69,12 @@ public class UserView {
 
     public void delete() {
         System.out.println("==주소록 삭제==");
+        System.out.println("삭제할 ID : ");
+        int id = sc.nextInt();
+        int result = service.delete(id);
+        System.out.println(result == 1?
+                "ID: " + id + "삭제 완료!"
+                : "삭제 실패 : ID를 확인하세요");
     }
 
     public void searchAll() {

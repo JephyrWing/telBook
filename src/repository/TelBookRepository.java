@@ -100,4 +100,21 @@ public class TelBookRepository {
         }
         return dtoList;
     }
+
+    public int delete(int id) {
+        PreparedStatement psmt = null;
+        // 2. 쿼리 생성
+        // 실행 결과를 담을 변수
+        int result = 0;
+        try {
+            //JAVA에서 쿼리 쓸 때 약속 : 함수들은 대문자로 쓴다.
+            String sql = "DELETE FROM telbook WHERE id = " + id;
+            psmt = conn.prepareStatement(sql);
+            result = psmt.executeUpdate();
+            psmt.close();
+        } catch (Exception e) {
+            System.out.println("DELETE 오류 : " + e.getMessage());
+        }
+        return result;
+    }
 }
