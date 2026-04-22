@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class TelBookMain {
     public static void main(String[] args) throws MyException {
         Connection connection = DBConnect.getConnection();
-        TelBookRepository repository = new TelBookRepository();
+        TelBookRepository repository = new TelBookRepository(connection);
         TelBookService service = new TelBookService(repository);
         Scanner sc = new Scanner(System.in);
         //UserView 인스턴스 생성
