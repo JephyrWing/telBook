@@ -61,8 +61,6 @@ public class UserView {
             }
         }
         service.insert(name, age, address, telNum);
-
-
     }
 
     public void update() {
@@ -88,8 +86,16 @@ public class UserView {
         //stream을 이용해서 출력
         //list.forEach(x -> System.out.println(x));
     }
-
     public void searchByID() {
         System.out.println("==ID로 불러오기==");
+        System.out.println("검색할 주소록 ID를 입력해주세요.");
+        int id = sc.nextInt();
+        List<TelDto> list = service.getListOne(id);
+        if (list.isEmpty()) {
+            System.out.println("해당 ID가 없습니다.");
+        } else {
+            list.forEach(x -> System.out.println(x));
+        }
     }
 }
+
