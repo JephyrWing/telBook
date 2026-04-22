@@ -46,7 +46,7 @@ public class TelBookMain {
                     break;
                 case 6:
                     System.out.println("시스템을 종료합니다.");
-                    connection.close();
+                    DBConnect.closeConnection();
             }
         }
     }
