@@ -12,6 +12,8 @@ import java.util.Scanner;
 public class UserView {
     private final Scanner sc;
     private final TelBookService service;
+    // 검증 클래스 생성
+    InputValidation va = new InputValidation();
 
     public UserView(Scanner sc, TelBookService service) {
         this.sc = sc;
@@ -19,8 +21,6 @@ public class UserView {
     }
 
     public void insert() throws MyException {
-        // 검증 클래스 생성
-        InputValidation va = new InputValidation();
         System.out.println("==주소록 등록==");
         String name = "";
         int age = 0;
@@ -64,7 +64,67 @@ public class UserView {
     }
 
     public void update() {
-        System.out.println("==주소록 등록==");
+        System.out.println("==주소록 업데이트==");
+        System.out.println("수정할 ID : ");
+        int id = sc.nextInt();
+        // 해당 아이디가 존재하는 지 확인
+        // 메서드의 리턴타입을 쉽게 얻는 법
+        // 단축키 : ctrl + alt + v
+        List<TelDto> exists = service.getListOne(id);
+        if (exists.isEmpty()) {
+            System.out.println("해당 ID가 없습니다.");
+            return;
+        }
+        //ID가 존재하는 경우의 처리
+        TelDto oldData = exists.get(0);
+
+        String name = "";
+        int age = 0;
+        String address = "";
+        String telNum = "";
+
+        while (true) {
+            try {
+                System.out.println("수정 전 이름 : ");
+                System.out.println(oldData.getName());
+                System.out.println("수정할 이름 : ");
+                name = sc.next();
+                va.nameCheck(name);
+                break;
+            } catch (MyException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        while (true) {
+            try {
+                System.out.println("수정 전 나이 : ");
+                System.out.println(oldData.getAge());
+                System.out.println("수정할 나이 : ");
+                age = sc.nextInt();
+                va.ageCheck(age);
+                break;
+            } catch (MyException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        System.out.println("수정 전 주소 : ");
+        System.out.println(oldData.getAddress());
+        System.out.println("수정할 주소 : ");
+        address = sc.next();
+
+        while (true) {
+            try {
+                System.out.print("수정 전 전화번호 : ");
+                System.out.println(oldData.getTelNum());
+                System.out.println("수정할 전화번호(XXX-XXXX-XXXX) : ");
+                telNum = sc.next();
+                va.phoneCheck(telNum);
+                break;
+            } catch (MyException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        service.update(id, name, age, address, telNum);
     }
 
     public void delete() {
