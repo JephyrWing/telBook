@@ -163,5 +163,50 @@ public class UserView {
             list.forEach(x -> System.out.println(x));
         }
     }
+
+    public void search() {
+        int selnum = 0;
+        List<TelDto> searchlist;
+        while (true) {
+            try {
+                System.out.println("검색할 키워드를 선택하세요. 1. 이름 2. 주소");
+                selnum = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                System.out.println("숫자만 입력해주세요.");
+            }
+        }
+        String keyword = "";
+        switch (selnum) {
+            case 1 -> {
+                System.out.println("검색할 이름 키워드를 입력해 주세요");
+                keyword = sc.next();
+                searchlist = service.getListByName(keyword);
+                if (searchlist.isEmpty()) {
+                    System.out.println("검색 결과가 없습니다.");
+                    return;
+                }
+                for (TelDto dto : searchlist) {
+                    System.out.println(dto);
+                }
+            }
+            case 2 -> {
+                System.out.println("검색할 주소 키워드를 입력해 주세요");
+                keyword = sc.next();
+                searchlist = service.getListByAddress(keyword);
+                if (searchlist.isEmpty()) {
+                    System.out.println("검색 결과가 없습니다.");
+                    return;
+                }
+                for (TelDto dto : searchlist) {
+                    System.out.println(dto);
+                }
+            }
+            default -> {
+                System.out.println("1번과 2번 중에 골라주세요");
+                search();
+            }
+        }
+    }
 }
 
