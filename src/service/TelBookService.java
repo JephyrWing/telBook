@@ -39,4 +39,12 @@ public class TelBookService {
             System.out.println("정상적으로 저장되었습니다.");
         }
     }
+
+    public List<TelDto> getListByName(String name) {
+        return repository.findByName(name);
+    }
+
+    public List<TelDto> getListByAddress(String address) {
+        return repository.findByAddress(address);
+    }
 }

@@ -20,7 +20,7 @@ public class TelBookMain {
         int input;
         while (true) {
             do {
-                System.out.println("1.입력 2.수정 3.삭제 4.전체출력 5.ID검색 6.종료");
+                System.out.println("1.입력 2.수정 3.삭제 4.전체출력 5.ID검색 6.검색 7.종료");
                 System.out.println("▶ 메뉴 입력 : ");
                 try {
                     input = sc.nextInt();
@@ -44,7 +44,14 @@ public class TelBookMain {
                 case 5:
                     userView.searchByID();
                     break;
-                case 6:
+                case 6: // 검색을 선택하면, 1. 이름  2. 주소
+                        // 선택하는 화면이 나온 후
+                        // 검색 카테고리 선택 번호 : choice
+                        // keyword 값으로 받아서
+                        // 검색 기능을 실행
+                    userView.search();
+                    break;
+                case 7:
                     System.out.println("시스템을 종료합니다.");
                     DBConnect.closeConnection();
             }
